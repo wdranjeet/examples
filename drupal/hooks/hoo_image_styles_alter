@@ -1,0 +1,16 @@
+/**
+ * Implements hook_image_styles_alter().
+ */
+function core_media_image_styles_alter(&$styles) {
+  if (isset($styles['media_thumbnail'])) {
+    foreach ($styles['media_thumbnail']['effects'] as &$effect) {
+      if ($effect['name'] == 'image_scale_and_crop') {
+        $effect['data'] = array(
+          'width' => '180',
+          'height' => '160',
+        );
+        $styles['media_thumbnail']['label'] = 'Media thumbnail (180x180)';
+      }
+    }
+  }
+}
